@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+CONFIG_FILES=(stack/*.yml)
+
+docker-compose ${CONFIG_FILES[@]/#/-f} ${@}

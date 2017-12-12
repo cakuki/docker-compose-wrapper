@@ -5,7 +5,7 @@ This project is an example for "[Docker Compose for Developing Microservices](ht
 ## Running
 
 ```bash
-docker-compose up
+./wrapper up
 ```
 
 Then open http://localhost:8080 on your browser.

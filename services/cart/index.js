@@ -17,13 +17,13 @@ app.use(express.json());
 
     app.get('/', (req, res) => res.send('api is working!'));
 
-    app.get('/posts', (req, res, next) => {
+    app.get('/cart/items', (req, res, next) => {
         Post.find(req.query).toArray()
             .then(result => res.send(result))
             .catch(next);
     });
 
-    app.post('/posts', (req, res, next) => {
+    app.post('/cart/items', (req, res, next) => {
         Post.insert(req.body, { w:1 })
             .then(result => res.json(result))
             .catch(next);

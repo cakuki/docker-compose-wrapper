@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Welcome to our Web1.0 Store</title>
+</head>
+<body>
+<h1>New Year Sale!</h1>
+<h2>Snowballs!</h2>
+<label for="amount">Amount:</label>
+<input type="number" name="amount" id="amount">
+<button id="button-save">Order</button>
+<hr/>
+<ul></ul>
+<script>
+const cartApi = 'http://localhost:3000/cart/items';
+
+document.querySelector('#button-save').addEventListener('click', () => {
+    let $amount = document.querySelector('#amount');
+
+    if (!$amount.value) return;
+
+    fetch(cartApi, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ amount: $amount.value })
+    })
+    .then(() => {
+        document.querySelector('ul').innerHTML += `<li>${$amount.value}</li>`
+        $amount.value = 0;
+    });
+}, false);
+
+fetch(cartApi).then(response => response.json()).then(orders => {
+    document.querySelector('ul').innerHTML = orders.map(order => `<li>${order.amount}</li>`).join('');
+})
+</script>
+</body>
+</html>
