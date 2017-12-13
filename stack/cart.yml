@@ -1,7 +1,7 @@
 version: '3'
 services:
   cart-service:
-    build: services/cart
+    build: ../services/cart
     depends_on:
      - db
     ports:

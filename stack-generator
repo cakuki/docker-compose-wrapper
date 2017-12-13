@@ -1,0 +1,30 @@
+#!/bin/bash -e
+
+NEXT_PORT=3000
+
+cd services
+
+for service in *; do
+    unset PORT
+    if [ -f "${service}/.env" ]; then
+        source "${service}/.env"
+    fi
+
+    # Set next available port value if it's not configured
+    if [ -z "${PORT}" ]; then
+        PORT=${PORT:-"$NEXT_PORT:$NEXT_PORT"}
+        NEXT_PORT=$(expr $NEXT_PORT + 1)
+    fi
+
+
+    cat >"../stack/${service}.yml" <<EOF
+version: '3'
+services:
+  ${service}-service:
+    build: ../services/${service}
+    depends_on:
+     - db
+    ports:
+     - "$PORT"
+EOF
+done

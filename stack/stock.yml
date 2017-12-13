@@ -1,4 +1,8 @@
 version: '3'
 services:
   stock-service:
-    build: services/stock
+    build: ../services/stock
+    depends_on:
+     - db
+    ports:
+     - "3003:3003"

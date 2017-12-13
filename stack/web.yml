@@ -1,8 +1,8 @@
 version: '3'
 services:
-  web:
-    image: nginx:1.13.7
-    volumes:
-     - ./services/web:/usr/share/nginx/html:ro
+  web-service:
+    build: ../services/web
+    depends_on:
+     - db
     ports:
      - "8080:80"

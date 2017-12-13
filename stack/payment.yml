@@ -1,4 +1,8 @@
 version: '3'
 services:
   payment-service:
-    build: services/payment
+    build: ../services/payment
+    depends_on:
+     - db
+    ports:
+     - "3002:3002"

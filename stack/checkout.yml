@@ -1,4 +1,8 @@
 version: '3'
 services:
   checkout-service:
-    build: services/checkout
+    build: ../services/checkout
+    depends_on:
+     - db
+    ports:
+     - "3001:3001"

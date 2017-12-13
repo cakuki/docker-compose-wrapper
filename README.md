@@ -14,6 +14,22 @@ This is only intended for local development.
 
 Then open http://localhost:8080 on your browser.
 
+## How does it work?
+
+Instead of having single `docker-compose.yml` file this project offers a compose config for each service method. There is a different file for each service in `stack` directory. This method intended for increasing visibility and maintainability while developing microservices with Docker Compose.
+
+## Generating service configurations
+
+As all services in this project have generic form, they are genereted by `stack-generator` with a basic templating.
+
+To `stack/*.yml` file for each service in `services` directory, run:
+
+```bash
+./stack-generator
+```
+
+There is a small customization enabled for overring port forwarding. For that please inspect templating script source.
+
 ## Explore
 
 You can basically use any `docker-compose` command with `./wrapper` script. Try `./wrapper config` to see merged output that's being used by Docker Compose process.
